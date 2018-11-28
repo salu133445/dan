@@ -96,14 +96,20 @@ model have achieved during the training.
 
 | Model   | G (hidden norm) | G (out norm) | G (out act) | D (norm) | Accuracy |
 |:-------:|:---------------:|:------------:|:-----------:|:--------:|:--------:|
+| GAN-GP  | BN              | BN           | softmax     | LN       | 0.9581   |
 | WGAN-GP | BN              | BN           | softmax     | LN       | 0.9557   |
+| GAN-GP  | BN              | BN           | softmax     | X        | 0.9522   |
 | WGAN-GP | BN              | X            | softmax     | X        | 0.9489   |
+| WGAN-GP | LN              | X            | softmax     | X        | 0.9466   |
 | WGAN-GP | BN              | BN           | softmax     | X        | 0.9353   |
+| WGAN-GP | LN              | LN           | softmax     | X        | 0.9340   |
 | WGAN-GP | BN              | X            | X           | X        | 0.9253   |
 | WGAN-GP | BN              | BN           | X           | X        | 0.9252   |
 | WGAN-GP | X               | X            | softmax     | X        | 0.9218   |
 | WGAN-GP | X               | X            | X           | X        | 0.8914   |
 | WGAN-GP | BN              | BN           | softmax     | BN       | 0.8615   |
+| WGAN    | BN              | BN           | softmax     | LN       | 0.8391   |
+| WGAN    | BN              | BN           | softmax     | X        | 0.2898   |
 
 _Objectives_&mdash;__GAN__: non-saturating GAN; __WGAN__: Wasserstein GAN with
 weight clipping; __WGAN-GP__: Wasserstein GAN with gradient penalties.
