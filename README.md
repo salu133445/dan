@@ -26,6 +26,67 @@ critics for the predictor. Hence, _the generator is not optimizing any specific
 form of surrogate loss function_ for the discriminator is being optimized along
 the training process.
 
+## Prerequisites
+
+> __Below we assume the working directory is the repository root.__
+
+### Install dependencies
+
+- Using pipenv (recommended)
+
+  > Make sure `pipenv` is installed. (If not, simply run `pip install pipenv`.)
+
+  ```sh
+  # Install the dependencies
+  pipenv install
+  # Activate the virtual environment
+  pipenv shell
+  ```
+
+- Using pip
+
+  ```sh
+  # Install the dependencies
+  pip install -r requirements.txt
+  ```
+
+### Prepare training data
+
+```sh
+# Download the training data
+./scripts/download_data.sh
+# Store the training data to shared memory
+./scripts/process_data.sh
+```
+
+You can also download the MNIST handwritten digit database manually
+[here](http://yann.lecun.com/exdb/mnist/).
+
+## Scripts
+
+We provide several shell scripts for easy managing the experiments. (See
+[here](scripts/README.md) for a detailed documentation.)
+
+> __Below we assume the working directory is the repository root.__
+
+### Train a new model
+
+1. Run the following command to set up a new experiment with default settings.
+
+   ```sh
+   # Set up a new experiment
+   ./scripts/setup_exp.sh "./exp/my_experiment/" "Some notes on my experiment"
+   ```
+
+2. Modify the configuration and model parameter files for experimental settings.
+
+3. Train the model by running the following command.
+
+     ```sh
+     # Train the model
+     ./scripts/run_train.sh "./exp/my_experiment/" "0"
+     ```
+
 ## Results
 
 ___More experimental results and analysis are available [here](results).___
