@@ -15,10 +15,6 @@ summarized in the following table.
 
 ## Full Table of Test Accuracies
 
-_Objectives_&mdash;__GAN__: non-saturating GAN; __WGAN__: Wasserstein GAN with
-weight clipping; __WGAN-GP__: Wasserstein GAN with gradient penalties.
-_Normalizations_&mdash;__BN__: batch normalization; __LN__: layer normalization.
-
 In the following tables, we report the highest accuracy on the test set that the
 model have achieved during the training.
 
@@ -32,6 +28,10 @@ model have achieved during the training.
 | WGAN-GP | X               | X            | softmax     | X        | 0.9218   |
 | WGAN-GP | X               | X            | X           | X        | 0.8914   |
 | WGAN-GP | BN              | BN           | softmax     | BN       | 0.8615   |
+
+_Objectives_&mdash;__GAN__: non-saturating GAN; __WGAN__: Wasserstein GAN with
+weight clipping; __WGAN-GP__: Wasserstein GAN with gradient penalties.
+_Normalizations_&mdash;__BN__: batch normalization; __LN__: layer normalization.
 
 ![test_accuracy](figs/test_acc.png)
 
