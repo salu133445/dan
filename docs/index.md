@@ -16,7 +16,7 @@ label. The discriminator take as input either a real-data-real-label pair
 (__x__, __y__) or a real-data-fake-label pair (__x__, G(__x__)) and aim to tell
 the fake ones from the real ones.
 
-![system](figs/system.png)
+<img src="figs/system.png" alt="system" style="max-width:400px;">
 
 Unlike a typical traditional supervised training scenario, where we need to pick
 a specific surrogate loss function as the objective of the predictor to learn

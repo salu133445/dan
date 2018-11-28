@@ -17,7 +17,7 @@ The adversarial setting goes like this:
 Theoretically, the model distribution _p(G(__z__))_ will become closer to the
 data distribution as the training unfolds.
 
-<img src="figs/gan.png" alt="system" style="max-width:400px;">
+<img src="figs/gan.png" alt="gan" style="max-width:500px;">
 
 > Formally, _G_ is actually learning a projection from the prior distribution
 _p(__z__)_ to the data distribution _p(__x__)_. To make it clear, it's a
@@ -29,7 +29,7 @@ In a conditional GAN (CGAN) [4], both the generator _G_ and the discriminator
 _D_ are now conditioned on some variable _y_. Typical (_x_, _y_) pairs include
 (data, label), (data, tag vector), (image, image).
 
-<img src="figs/cgan.png" alt="system" style="max-width:500px;">
+![cgan](figs/cgan.png)
 
 ## Wasserstein GAN (WGAN)
 
