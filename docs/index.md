@@ -9,12 +9,12 @@ results are available [here](results).
 
 The discriminative adversarial network (DAN) is proposed by Mirza _et al._ as a
 discriminative framework for learning loss functions for semi-supervised
-learning [1]. It is based on the generative adversarial networks (GANs) [1] and
-the conditional generative adversarial networks (GANs). However, the generator
-now becomes a predictor that take as input an unlabeled data and predict its
-label. The discriminator take as input either a real-data-real-label pair
-(__x__, __y__) or a real-data-fake-label pair (__x__, G(__x__)) and aim to tell
-the fake ones from the real ones.
+learning [1]. It is based on the generative adversarial networks (GANs) [2] and
+the conditional generative adversarial networks (CGAN) [3]. However,
+the generator now becomes a predictor that takes as input an unlabeled data and
+predict its label. The discriminator takes as input either a
+real-data-real-label pair (__x__, __y__) or a real-data-fake-label pair
+(__x__, G(__x__)) and aims to tell the fake pairs from the real ones.
 
 <img src="figs/system.png" alt="system" style="max-width:400px;">
 
@@ -31,3 +31,12 @@ the training process.
     "Learning Loss Functions for Semi-supervised Learning via Discriminative
     Adversarial Networks,"
     in _NIPS Workshop on Learning with Limited Labeled Data_, 2017.
+
+[2] Ian J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David
+    Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio,
+    "Generative Adversarial Networks",
+    in _Proc. NIPS_, 2014.
+
+[3] Mehdi Mirza and Simon Osindero,
+    "Conditional Generative Adversarial Nets",
+    _arXiv preprint, arXiv:1411.1784_, 2014.
