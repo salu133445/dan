@@ -1,8 +1,8 @@
 # MNIST Digit Classification with DANs in TensorFlow
 
 In this project, we train a discriminative adversarial network (DAN) to classify
-MNIST handwritten digit. We also experimentally compare different normalization
-approaches, activation functions and training objectives. The experimental
+MNIST handwritten digit. We experimentally compare different training
+objectives, normalization approaches and activation functions. The experimental
 results are available [here](results).
 
 ## Dicriminative Adversarial Networks (DANs)
