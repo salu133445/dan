@@ -42,9 +42,9 @@ __WGAN__: Wasserstein GAN with weight clipping; __WGAN-GP__: Wasserstein GAN
 with gradient penalties. _Normalizations_&mdash;__BN__: batch normalization;
 __LN__: layer normalization.
 
-<img src="figs/test_acc.png" alt="test_accuracy" style="width:100%;">
+<img src="figs/test_acc.png" alt="test_accuracy" style="max-width:100%;">
 
-<img src="figs/test_acc_closeup.png" alt="test_accuracy_closeup" style="width:100%;">
+<img src="figs/test_acc_closeup.png" alt="test_accuracy_closeup" style="max-width:100%;">
 
 ## Training Accuracies
 
@@ -52,9 +52,9 @@ We also plotted the accuracy for each training batch along the training process.
 As we can see from the following two graphs, the training curve has a similar
 trend as the corresponding test curve.
 
-<img src="figs/train_acc.png" alt="train_accuracy" style="width:100%;">
+<img src="figs/train_acc.png" alt="train_accuracy" style="max-width:100%;">
 
-<img src="figs/train_acc_closeup.png" alt="train_accuracy_closeup" style="width:100%;">
+<img src="figs/train_acc_closeup.png" alt="train_accuracy_closeup" style="max-width:100%;">
 
 ## Training Objectives
 

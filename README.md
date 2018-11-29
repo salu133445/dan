@@ -120,7 +120,7 @@ with gradient penalties. _Normalizations_&mdash;__BN__: batch normalization;
 __LN__: layer normalization.
 
 <p align="center">
-  <img src="docs/figs/test_acc.png" alt="test_accuracy" style="width:100%;">
+  <img src="docs/figs/test_acc.png" alt="test_accuracy" style="max-width:100%;">
 </p>
 
 ___More experimental results and analysis are available
