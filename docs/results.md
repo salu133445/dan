@@ -80,7 +80,6 @@ WGAN.
 | WGAN-GP | BN              | BN           | X           | X        | 0.9252   |
 | WGAN-GP | X               | X            | softmax     | X        | 0.9218   |
 | WGAN-GP | X               | X            | X           | X        | 0.8914   |
-| WGAN-GP | LN              | LN           | softmax     | X        | 0.9340   |
 
 ![normalization_in_gen](figs/norm_in_g.png)
 
