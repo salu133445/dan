@@ -1,4 +1,4 @@
-# Source Code for ``Towards a Deeper Understanding of Adversarial Losses''
+# Source Code for "Towards a Deeper Understanding of Adversarial Losses"
 
 ## Prerequisites
 
