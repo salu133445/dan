@@ -1,4 +1,6 @@
-# Source Code for "Towards a Deeper Understanding of Adversarial Losses"
+# DANTest
+
+Source code for "Towards a Deeper Understanding of Adversarial Losses"
 
 ## Prerequisites
 
