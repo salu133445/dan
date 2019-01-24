@@ -126,7 +126,8 @@ def main():
 
     # Training hooks
     global_step = tf.train.get_global_step()
-    steps_per_iter = config['n_dis_updates_per_gen_update'] + 1
+    steps_per_iter = (
+        config['n_gen_steps_per_iter'] + config['n_dis_steps_per_iter'])
     hooks = [tf.train.NanTensorHook(train_nodes['loss'])]
 
     # Tensor logger
@@ -164,16 +165,15 @@ def main():
         while step < config['steps']:
 
             # Train the discriminator
-            if step < 10:
-                n_dis_updates = 10 * config['n_dis_updates_per_gen_update']
-            else:
-                n_dis_updates = config['n_dis_updates_per_gen_update']
-            for _ in range(n_dis_updates):
+            for _ in range(config['n_dis_steps_per_iter']):
                 sess.run(train_nodes['train_ops']['dis'])
 
             # Train the generator
             log_loss_steps = config['log_loss_steps'] or 100
             if (step + 1) % log_loss_steps == 0:
+                for _ in range(config['n_gen_steps_per_iter'] - 1):
+                    sess.run(train_nodes['train_ops']['gen'])
+
                 step, _, tensor_logger_values = sess.run([
                     train_nodes['gen_step'], train_nodes['train_ops']['gen'],
                     tensor_logger])
@@ -188,6 +188,10 @@ def main():
                     tensor_logger_values['dis_loss'],
                     tensor_logger_values['train_acc']))
             else:
+                for _ in range(config['n_gen_steps_per_iter'] - 1):
+                    sess.run([
+                        train_nodes['gen_step'],
+                        train_nodes['train_ops']['gen']])
                 step, _ = sess.run([
                     train_nodes['gen_step'], train_nodes['train_ops']['gen']])
 

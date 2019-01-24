@@ -1,36 +1,106 @@
-# Model
+# =============================== < Experiment > ===============================
+validation_steps: 100 # set to 0 to disable validation
+log_loss_steps: 100 # set to 0 to disable loss logging
+save_summaries_steps: 0 # set to 0 to disable saving summaries
+save_checkpoint_steps: 0 # set to 0 to disable saving checkpoints
+
+
+
+# ================================== < Data > ==================================
+data_source: 'sa' # 'sa', 'npy', 'npz'
+train_x_filename: mnist_train_x
+  # Available values: (see Section 5.1 and 5.3 of the paper)
+  #   ===========================================================
+  #     Value                            Datasets
+  #   -----------------------------------------------------------
+  #     mnist_train_x                    standard datset
+  #     imbalanced_mnist_train_x         imbalanced datset
+  #     super_imbalanced_mnist_train_x   very imbalanced datset
+  #   ===========================================================
+train_y_filename: mnist_train_y
+  # Available values: (see Section 5.1 and 5.3 of the paper)
+  #   ===========================================================
+  #     Value                            Datasets
+  #   -----------------------------------------------------------
+  #     mnist_train_y                    standard datset
+  #     imbalanced_mnist_train_y         imbalanced datset
+  #     super_imbalanced_mnist_train_y   very imbalanced datset
+  #   ===========================================================
+val_x_filename: mnist_val_x
+val_y_filename: mnist_val_y
+
+
+
+# ================================= < Model > ==================================
 data_shape: [28, 28, 1]
 n_classes: 10
 nets:
   generator: bn_relu_bn_softmax
   discriminator: ln_relu
+    # Available values: (see Section 5.1 of the paper)
+    #   ====================================
+    #     Value     Normalization method
+    #   ------------------------------------
+    #     ln_relu   layer normalization
+    #     sn_relu   spectral normalization
+    #   ====================================
 
-# Experiment
-validation_steps: 100
-log_validation: true
-log_loss_steps: 100 # set to 0 to disable loss logging
-save_summaries_steps: 0 # set to 0 to disable saving summaries
-save_checkpoint_steps: 0 # set to 0 to disable saving checkpoints
 
-# Data
-data_source: 'sa' # 'sa', 'npy', 'npz'
-train_x_filename: mnist_train_x
-train_y_filename: mnist_train_y
-val_x_filename: mnist_val_x
-val_y_filename: mnist_val_y
+# =========================== < Adversarial Losses > ===========================
+gan_loss_type: classic
+  # Available values: (see Section 5.3 and 5.4 of the paper)
+  #   ===========================================================
+  #     Value                        Loss function name
+  #   -----------------------------------------------------------
+  #     classic                      classic (minimax)
+  #     nonsaturating                classic (nonsaturating)
+  #     new                          classic (linear)
+  #   -----------------------------------------------------------
+  #     hinge                        hinge (linear)
+  #     nonsaturating-hinge          hinge (nonsaturating)
+  #     minimax-hinge                hinge (minimax)
+  #   -----------------------------------------------------------
+  #     wasserstein                  Wasserstein
+  #     least-squares                least square
+  #     relativistic-average         relativistic average
+  #     relativistic-average-hinge   relativistic average hinge
+  #   -----------------------------------------------------------
+  #     double-absolute              absolute
+  #     absolute                     asymmetric
+  #   ===========================================================
 
-# Training
+
+
+# =========================== < Gradient Penalties > ===========================
+use_gradient_penalties: true
+gradient_penalties_type: two-side
+  # Available values: (see Section 5.3 of the paper)
+  #   ========================================================
+  #     Value            Gradient penalty type
+  #   --------------------------------------------------------
+  #     two-side         Two-side coupled gradient penalties
+  #     one-side         One-side coupled gradient penalties
+  #     local-two-side   Two-side local gradient penalties
+  #     local-one-side   One-side local gradient penalties
+  #     R1               R1 gradient penalties
+  #     R2               R2 gradient penalties
+  #   ========================================================
+gradient_penalties_coefficient: 10 # 'lambda' in the paper (see equation 4)
+lipschitz_constraint: 1 # 'k' in the paper (see Table 2)
+local_noise_stddev: 0.1 # 'c' in the paper (see Table 2)
+
+
+
+# ================================ < Training > ================================
 steps: 100000
 batch_size: 64
-n_dis_updates_per_gen_update: 5
-
-# Optimizers
-learning_rate: 0.001
-adam:
-  beta1: 0.5
+n_dis_steps_per_iter: 1
+n_gen_steps_per_iter: 1
+g_opt:
+  alpha: 0.001
+  beta1: 0.0
   beta2: 0.9
-
-# Losses
-gan_loss_type: wasserstein # nonsaturating, classic, wasserstein, hinge
-use_gradient_penalties: true
-weight_clipping_threshold: 0.01
+d_opt:
+  alpha: 0.001
+  beta1: 0.0
+  beta2: 0.9

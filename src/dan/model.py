@@ -6,6 +6,11 @@ from dan.losses import get_adv_losses
 from dan.utils import load_component
 LOGGER = logging.getLogger(__name__)
 
+def get_l2_norm(tensor):
+    """Return the l2 norm of a tensor."""
+    return tf.sqrt(1e-8 + tf.reduce_sum(
+        tf.square(tensor), np.arange(1, tensor.get_shape().ndims)))
+
 class Model:
     """Class that defines the model."""
     def __init__(self, config, name='Model'):
@@ -78,17 +83,64 @@ class Model:
 
             # --- Gradient penalties -------------------------------------------
             if config['use_gradient_penalties']:
-                # Compute gradient penalties
-                eps_y = tf.random_uniform(tf.shape(nodes['real_y']))
-                inter_y = (
-                    eps_y * nodes['real_y'] + (1.0 - eps_y) * nodes['fake_y'])
-                dis_y_inter_out = self.dis(x, inter_y, True)
-                gradient_y = tf.gradients(dis_y_inter_out, inter_y)[0]
-                slopes_y = tf.sqrt(1e-8 + tf.reduce_sum(
-                    tf.square(gradient_y),
-                    np.arange(1, gradient_y.get_shape().ndims)))
-                gradient_penalty_y = tf.reduce_mean(tf.square(slopes_y - 1.0))
-                nodes['dis_loss'] += 10.0 * gradient_penalty_y
+                if (config['gradient_penalties_type'] == 'two-side' or
+                        config['gradient_penalties_type'] == 'one-side' or
+                        config['gradient_penalties_type'] == 'local-two-side' or
+                        config['gradient_penalties_type'] == 'local-one-side'):
+                    lipschitz_constraint = config['lipschitz_constraint']
+
+                # Coupled gradient penalties
+                if (config['gradient_penalties_type'] == 'two-side' or
+                        config['gradient_penalties_type'] == 'one-side'):
+                    eps_y = tf.random_uniform(tf.shape(nodes['real_y']))
+                    inter_y = (
+                        eps_y * nodes['real_y'] +
+                        (1.0 - eps_y) * nodes['fake_y'])
+                    dis_y_inter_out = self.dis(x, inter_y, True)
+                    slope_y = get_l2_norm(
+                        tf.gradients(dis_y_inter_out, inter_y)[0])
+                    if config['gradient_penalties_type'] == 'two-side':
+                        gradient_penalty = tf.reduce_mean(
+                            tf.square(slope_y - lipschitz_constraint))
+                    elif config['gradient_penalties_type'] == 'one-side':
+                        gradient_penalty = tf.reduce_mean(
+                            tf.maximum(0.0, slope_y - lipschitz_constraint))
+
+                # Local gradient penalties
+                elif (config['gradient_penalties_type'] == 'local-two-side' or
+                      config['gradient_penalties_type'] == 'local-one-side'):
+                    noise_y = tf.random_normal(
+                        tf.shape(nodes['real_y']),
+                        stddev=config['local_noise_stddev'])
+                    pertubed_y = nodes['real_y'] + noise_y
+                    dis_y_inter_out = self.dis(x, pertubed_y, True)
+                    slope_y = get_l2_norm(
+                        tf.gradients(dis_y_inter_out, pertubed_y)[0])
+                    if config['gradient_penalties_type'] == 'local-two-side':
+                        gradient_penalty = tf.reduce_mean(
+                            tf.square(slope_y - lipschitz_constraint))
+                    elif config['gradient_penalties_type'] == 'local-one-side':
+                        gradient_penalty = tf.reduce_mean(
+                            tf.maximum(0.0, slope_y - lipschitz_constraint))
+
+                # R1 gradient penalties
+                elif config['gradient_penalties_type'] == 'R1':
+                    slope_y = get_l2_norm(
+                        tf.gradients(nodes['dis_real'], nodes['real_y'])[0])
+                    gradient_penalty = tf.reduce_mean(slope_y)
+
+                # R2 gradient penalties
+                elif config['gradient_penalties_type'] == 'R2':
+                    slope_y = get_l2_norm(
+                        tf.gradients(nodes['dis_fake'], nodes['fake_y'])[0])
+                    gradient_penalty = tf.reduce_mean(slope_y)
+
+                else:
+                    raise ValueError("Unknown gradient penalties type " +
+                                     str(config['gradient_penalties_type']))
+
+                nodes['dis_loss'] += (
+                    config['gradient_penalties_coefficient'] * gradient_penalty)
 
             # Compute total loss (for logging and detecting NAN values only)
             nodes['loss'] = nodes['gen_loss'] + nodes['dis_loss']
@@ -97,11 +149,11 @@ class Model:
             LOGGER.info("Building training ops.")
             # --- Optimizers ---------------------------------------------------
             gen_opt = tf.train.AdamOptimizer(
-                config['learning_rate'], config['adam']['beta1'],
-                config['adam']['beta2'])
+                config['g_opt']['alpha'], config['g_opt']['beta1'],
+                config['g_opt']['beta2'])
             dis_opt = tf.train.AdamOptimizer(
-                config['learning_rate'], config['adam']['beta1'],
-                config['adam']['beta2'])
+                config['d_opt']['alpha'], config['d_opt']['beta1'],
+                config['d_opt']['beta2'])
 
             # --- Training ops -------------------------------------------------
             nodes['train_ops'] = {}
@@ -109,16 +161,6 @@ class Model:
             dis_vas = tf.trainable_variables(scope.name + '/' + self.dis.name)
             nodes['train_ops']['dis'] = dis_opt.minimize(
                 nodes['dis_loss'], global_step, dis_vas)
-
-            # Apply weight clipping
-            if (config['gan_loss_type'] == 'wasserstein' and
-                    not config['use_gradient_penalties']):
-                with tf.control_dependencies([nodes['train_ops']['dis']]):
-                    nodes['train_ops']['dis'] = tf.group(
-                        *(tf.assign(var, tf.clip_by_value(
-                            var, -config['weight_clipping_threshold'],
-                            config['weight_clipping_threshold']))
-                          for var in dis_vas))
 
             # Training ops for the generator
             update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)

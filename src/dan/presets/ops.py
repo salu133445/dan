@@ -1,4 +1,4 @@
-"""Tensorflow ops."""
+"""This file defines some handy Tensorflow ops."""
 import tensorflow as tf
 
 CONV_KERNEL_INITIALIZER = tf.truncated_normal_initializer(stddev=0.05)

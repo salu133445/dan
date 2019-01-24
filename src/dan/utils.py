@@ -22,14 +22,14 @@ def backup_src(dst):
     if os.path.exists(dst):
         shutil.rmtree(dst)
     shutil.copytree(
-        os.path.dirname(os.path.realpath(__file__)), dst,
+        os.path.dirname(os.path.dirname(os.path.realpath(__file__))), dst,
         ignore=shutil.ignore_patterns('__pycache__'))
 
 # --- Parameter file and dictionary utilities ----------------------------------
 def load_yaml(filename):
     """Load a yaml file and return as a Python object."""
     with open(filename) as f:
-        return yaml.load(f)
+        return yaml.safe_load(f)
 
 def update_not_none(dict1, dict2):
     """Update the values of keys in `dict1` with the values of the same key from
