@@ -11,9 +11,9 @@ are discriminative models.
 Based on DANs, we propose a new, simple framework, dubbed _DANTest_ for
 systematically comparing different adversarial losses.
 
-1. Build several DANs. For each of them, the generator 𝐺 takes as input a real
+1. Build several DANs. For each of them, the generator _G_ takes as input a real
    sample and outputs a fake label. The discriminator takes as input a real
-   sample with either its true label, or a fake label made by 𝐺, and outputs a
+   sample with either its true label, or a fake label made by _G_, and outputs a
    scalar indicating if the "sample–label" pair is real.
 2. Train the DANs with different component loss functions, regularization
    approaches or hyperparameters.
