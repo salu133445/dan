@@ -12,7 +12,7 @@ by the generator and outputs a scalar indicating its authenticity.
 
 The adversarial setting goes like this:
 
-- 𝐷 _tries to tell the fake samples from samples data_
+- 𝐷 _tries to tell the fake samples from the real samples_
 - 𝐺 _tries to fool_ 𝐷 _(to make_ 𝐷 _misclassify the generated, fake samples as
   real ones)_
 

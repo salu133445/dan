@@ -6,7 +6,7 @@ Discriminative adversarial networks (DANs) [1] are essentially conditional GANs
 (see [here](background)) where both the generator and the discriminator are
 discriminative models.
 
-<img src="figs/system.png" alt="system" style="max-width:400px;">
+<img src="figs/system.png" alt="system" style="max-width:500px;">
 
 Based on DANs, we propose a new, simple framework, dubbed _DANTest_ for
 systematically comparing different adversarial losses.
