@@ -42,8 +42,8 @@ labels), (data, tags), (image, image).
 ## Gradient penalties
 
 As the discriminator is often found to be too strong to provide reliable
-gradients to the generator, one regularization approach is to use some gradient
-penalties to constrain the modeling capability of the discriminator.
+gradients to the generator, one ___regularization approach___ is to use some
+gradient penalties to constrain the modeling capability of the discriminator.
 
 Most gradient penalties proposed in the literature take the following form:
 
@@ -67,7 +67,7 @@ Here are some common gradient penalties and their 𝑝<sub>𝐱</sub> and 𝑅(�
 
 ## Spectral normalization
 
-Spectral normalization [6] is another regularization approach for GANs. It
+Spectral normalization [6] is another ___regularization approach___ for GANs. It
 normalizes the spectral norm of each layer in a neural network to enforce the
 Lipschitz constraints. While the gradient penalties impose a local
 regularization, the spectral normalization impose a global regularization on the
