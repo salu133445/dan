@@ -36,7 +36,7 @@ min<sub><i>G</i></sub> <b>E</b><sub><b>x</b>~<i>p<sub>g</sub></i></sub>
 Here, _p<sub>d</sub>_ denotes the _data distribution_ and _p<sub>g</sub>_
 denotes the _model distribution_ implicitly defined by _G_(__z__) when
 __z__~_p_<sub>__z__</sub>. Moreover, _f_, _g_ and _h_ are real functions defined
-on the data space (i.e., _X_ → _R_), and we will refer to them as the
+on the data space (i.e., _X_ → ℝ), and we will refer to them as the
 ___component functions___.
 
 ## Conditional Generative Adversarial Networks (CGAN)
