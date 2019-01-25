@@ -1,42 +1,22 @@
-# MNIST Digit Classification with DANs in TensorFlow
+<img src="figs/psi-functions.png" alt="logo" style="max-width:600px; margin-left:0; margin-right:0;"/>
 
-In this project, we train a discriminative adversarial network (DAN) to classify
-MNIST handwritten digit. We experimentally compare different training
-objectives, normalization approaches and activation functions. The experimental
-results are available [here](results).
+In this project, we aim to gain a deeper understanding of _adversarial losses_
+by decoupling the effects of their [_component functions_](background) and
+[_regularization terms_](background). In essence, we aim for the following two
+research questions:
 
-## Dicriminative Adversarial Networks (DANs)
+1. _What certain types of component functions are theoretically valid
+   adversarial loss functions?_
+2. _How different combinations of the component functions and the regularization
+   approaches perform empirically against one another?_
 
-The discriminative adversarial network (DAN) is proposed by Mirza _et al._ as a
-discriminative framework for learning loss functions for semi-supervised
-learning [1]. It is based on the generative adversarial networks (GANs) [2] and
-the conditional generative adversarial networks (CGAN) [3]. However,
-the generator now becomes a predictor that takes as input an unlabeled data and
-predict its label. The discriminator takes as input either a
-real-data-real-label pair (__x__, __y__) or a real-data-fake-label pair
-(__x__, G(__x__)) and aims to tell the fake pairs from the real ones.
+For the first question, we derive some necessary and sufficient conditions of
+the component functions such that the adversarial loss is a divergence-like
+measure between the data and the model distributions. For more details, please
+refer to our paper (_warning: lots of math!_).
 
-<img src="figs/system.png" alt="system" style="max-width:400px;">
-
-Unlike a typical traditional supervised training scenario, where we need to pick
-a specific surrogate loss function as the objective of the predictor to learn
-the distribution _p_(__y__|__x__), in DANs the discriminator provides the
-critics for the predictor. Hence, _the generator is not optimizing any specific
-form of surrogate loss function_ for the discriminator is being optimized along
-the training process.
-
-## Reference
-
-[1] Cicero Nogueira dos Santos, Kahini Wadhawan, and Bowen Zhou,
-    "Learning Loss Functions for Semi-supervised Learning via Discriminative
-    Adversarial Networks,"
-    in _NIPS Workshop on Learning with Limited Labeled Data_, 2017.
-
-[2] Ian J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David
-    Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio,
-    "Generative Adversarial Networks",
-    in _Proc. NIPS_, 2014.
-
-[3] Mehdi Mirza and Simon Osindero,
-    "Conditional Generative Adversarial Nets",
-    _arXiv preprint, arXiv:1411.1784_, 2014.
+For the second question, we propose a new, simple framework called _DANTest_ for
+comparing different adversarial losses. With DANTest, we are able to decouple
+the effects of component functions and the regularization approaches. In other
+words, we would like to know which one of them makes an adversarial loss better
+than another. Learn more about the [DANTest](model).

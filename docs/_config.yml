@@ -1,3 +1,3 @@
 theme: jekyll-theme-minimal
-title: DAN
-description: MNIST Digit Classification with DANs in TensorFlow
+title: DANTest
+description: A Simple Framework for Comparing Adversarial Losses
