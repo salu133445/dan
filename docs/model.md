@@ -2,9 +2,9 @@
 
 ## Dicriminative Adversarial Networks (DANs)
 
-Discriminative adversarial networks (DANs) [1] are essentially conditional GANs
-(see [here](background)) where both the generator and the discriminator are
-discriminative models.
+Discriminative adversarial networks (DANs) [1] are essentially
+[conditional GANs](background) where both the generator and the discriminator
+are discriminative models.
 
 <img src="figs/system.png" alt="system" style="max-width:500px;">
 
