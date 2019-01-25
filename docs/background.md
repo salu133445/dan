@@ -8,11 +8,13 @@ prior distribution 𝑝<sub>𝐳</sub> and output a fake sample 𝐺(𝐳). The
 discriminator 𝐷 takes as input either a sample drawn from real data or generated
 by the generator and outputs a scalar indicating its authenticity.
 
+<img src="figs/gan.png" alt="gan" style="max-width:500px;">
+
 The adversarial setting goes like this:
 
-- __𝐷 tries to tell the fake samples from samples data__
-- __𝐺 tries to fool 𝐷 (to make 𝐷 misclassify the generated, fake samples as
-  real ones)__
+- _𝐷 tries to tell the fake samples from samples data__
+- _𝐺 tries to fool 𝐷 (to make 𝐷 misclassify the generated, fake samples as real
+  ones)_
 
 In general, most GAN loss functions proposed in the literature take the
 following form:
@@ -28,8 +30,6 @@ following form:
 
 Here, 𝑓, 𝑔 and ℎ are real functions defined on the data space (i.e., 𝒳 → ℝ),
 and we will refer to them as the ___component functions___.
-
-<img src="figs/gan.png" alt="gan" style="max-width:500px;">
 
 ## Conditional Generative Adversarial Networks (CGAN)
 
