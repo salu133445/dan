@@ -1,4 +1,4 @@
-<img src="figs/psi-functions.png" alt="logo" style="max-width:600px; margin-left:0; margin-right:0;"/>
+<img src="figs/psi-functions.png" alt="logo" style="max-width:500px; margin-left:0; margin-right:0;"/>
 
 In this project, we aim to gain a deeper understanding of _adversarial losses_
 by decoupling the effects of their [_component functions_](background) and
