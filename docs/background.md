@@ -23,7 +23,7 @@ following form:
 </p>
 
 <p style="padding-left:20pt">
-𝑚𝑖𝑛<sub>𝐺</sub> 𝔼<sub>𝐱~𝑝<sub>𝑔</sub></sub>[ ℎ(_D_(𝐱)) ]
+𝑚𝑖𝑛<sub>𝐺</sub> 𝔼<sub>𝐱~𝑝<sub>𝑔</sub></sub>[ ℎ(𝐷(𝐱)) ]
 </p>
 
 Here, 𝑓, 𝑔 and ℎ are real functions defined on the data space (i.e., 𝒳 → ℝ),
@@ -48,7 +48,7 @@ penalties to constrain the modeling capability of the discriminator.
 Most gradient penalties proposed in the literature take the following form:
 
 <p style="padding-left:20pt">
-𝜆 𝔼<sub>𝐱~𝑝<sub>𝐱</sub></sub> [ 𝑅( ||∇<sub>𝐱</sub>𝐱|| ) ]
+𝜆 𝔼<sub>𝐱~𝑝<sub>𝐱</sub></sub> [ 𝑅( ||∇<sub>𝐱</sub> 𝐷(𝐱)|| ) ]
 </p>
 
 Here, the _penalty weight_ 𝜆 ∈ ℝ is a pre-defined constant, and 𝑅(⋅) is a real
@@ -60,14 +60,14 @@ Here are some common gradient penalties and their 𝑝<sub>𝐱</sub> and 𝑅(�
 
 | gradient penalty type                | 𝑝<sub>𝐱</sub> | 𝑅(𝑥) |
 |--------------------------------------|:-------------:|:----:|
-| coupled gradient penalties [4]       | 𝑝<sub>𝑑</sub> + 𝑈[0, 1] (𝑝<sub>𝑔</sub> − 𝑝<sub>𝑑</sub>) | (𝑥 − 𝑘)<sup>2</sup> or 𝑚𝑎𝑥(𝑥, 𝑘) |
-| local gradient penalties [5]         | 𝑝<sub>𝑑</sub> + 𝑐 𝑁[0, 𝐼] | (𝑥 − 𝑘)<sup>2</sup> or 𝑚𝑎𝑥(𝑥, 𝑘) |
-| R<sub>1</sub> gradient penalties [6] | 𝑝<sub>𝑑</sub> | 𝑥    |
-| R<sub>2</sub> gradient penalties [6] | 𝑝<sub>𝑔</sub> | 𝑥    |
+| coupled gradient penalties [3]       | 𝑝<sub>𝑑</sub> + 𝑈[0, 1] (𝑝<sub>𝑔</sub> − 𝑝<sub>𝑑</sub>) | (𝑥 − 𝑘)<sup>2</sup> or 𝑚𝑎𝑥(𝑥, 𝑘) |
+| local gradient penalties [4]         | 𝑝<sub>𝑑</sub> + 𝑐 𝑁[0, 𝐼] | (𝑥 − 𝑘)<sup>2</sup> or 𝑚𝑎𝑥(𝑥, 𝑘) |
+| R<sub>1</sub> gradient penalties [5] | 𝑝<sub>𝑑</sub> | 𝑥    |
+| R<sub>2</sub> gradient penalties [5] | 𝑝<sub>𝑔</sub> | 𝑥    |
 
 ## Spectral normalization
 
-Spectral normalization is another regularization approach for GANs. It
+Spectral normalization [6] is another regularization approach for GANs. It
 normalizes the spectral norm of each layer in a neural network to enforce the
 Lipschitz constraints. While the gradient penalties impose a local
 regularization, the spectral normalization impose a global regularization on the
@@ -84,23 +84,19 @@ discriminator.
     "Conditional Generative Adversarial Nets,"
     _arXiv preprint, arXiv:1411.1784_, 2014.
 
-[3] Martin Arjovsky, Soumith Chintala, and Léon Bottou,
-    "Wasserstein Generative Adversarial Networks,"
-    in _Proc. ICML_, 2017.
-
-[4] Ishaan Gulrajani, Faruk Ahmed, Martin Arjovsky, Vincent Dumoulin, and
+[3] Ishaan Gulrajani, Faruk Ahmed, Martin Arjovsky, Vincent Dumoulin, and
     Aaron Courville,
     "Improved Training of Wasserstein GANs,"
     in _Proc. NeurIPS_, 2017.
 
-[5] Naveen Kodali, Jacob Abernethy, James Hays, and Zsolt Kira,
+[4] Naveen Kodali, Jacob Abernethy, James Hays, and Zsolt Kira,
     "On Convergence and Stability of GANs,"
     _arXiv preprint, arXiv:1705.07215_, 2017.
 
-[6] Lars Mescheder, Andreas Geiger, and Sebastian Nowozin,
+[5] Lars Mescheder, Andreas Geiger, and Sebastian Nowozin,
     "Which training methods for GANs do actually converge?"
     in _Proc. ICML_, 2018.
 
-[7] Takeru Miyato, Toshiki Kataoka, Masanori Koyama, and Yuichi Yoshida,
+[6] Takeru Miyato, Toshiki Kataoka, Masanori Koyama, and Yuichi Yoshida,
     "Spectral Normalization for Generative Adversarial Networks,"
     in _Proc. ICLR_, 2018.
