@@ -12,9 +12,9 @@ by the generator and outputs a scalar indicating its authenticity.
 
 The adversarial setting goes like this:
 
-- _𝐷 tries to tell the fake samples from samples data__
-- _𝐺 tries to fool 𝐷 (to make 𝐷 misclassify the generated, fake samples as real
-  ones)_
+- 𝐷 _tries to tell the fake samples from samples data_
+- 𝐺 _tries to fool_ 𝐷 _(to make_ 𝐷 _misclassify the generated, fake samples as
+  real ones)_
 
 In general, most GAN loss functions proposed in the literature take the
 following form:
