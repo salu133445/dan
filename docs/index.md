@@ -13,7 +13,7 @@ research questions:
 For the first question, we derive some necessary and sufficient conditions of
 the component functions such that the adversarial loss is a divergence-like
 measure between the data and the model distributions. For more details, please
-refer to our paper (_warning: lots of math!_).
+refer to our [paper](paper) (_warning: lots of math!_).
 
 For the second question, we propose a new, simple framework called _DANTest_ for
 comparing different adversarial losses. With DANTest, we are able to decouple

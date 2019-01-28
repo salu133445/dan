@@ -30,4 +30,4 @@ Specifically, we consider 10 existing component functions, 2 new component
 functions propose in light of our theoretical analysis, along with 14 different
 regularization approaches. Moreover, we use the DANTest to empirically study
 the effect of the Lipschitz constant, penalty weights momentum terms, and other
-hyperparameters. Please refer to our paper for the results.
+hyperparameters. Please refer to our [paper](paper) for the results.
