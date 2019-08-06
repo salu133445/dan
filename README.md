@@ -10,7 +10,7 @@ Source code for "Towards a Deeper Understanding of Adversarial Losses"
 
 - Using pipenv (recommended)
 
-  > Make sure `pipenv` is installed. (If not, simply run `pip install pipenv`.)
+  > Make sure `pipenv` is installed. (If not, simply run `pip install --user pipenv`.)
 
   ```sh
   # Install the dependencies
