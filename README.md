@@ -1,6 +1,6 @@
 # DANTest
 
-Source code for "Towards a Deeper Understanding of Adversarial Losses"
+Source code for "Towards a Deeper Understanding of Adversarial Losses under a Discriminative Adversarial Network Setting"
 
 ## Prerequisites
 
@@ -73,3 +73,13 @@ For each run, there will be three folders created in the experiment folder.
 - `src/`: contain a backup of the source code
 
 Note that the _validation results_ can be found in the `logs/` folder.
+
+## Paper
+
+__Towards a Deeper Understanding of Adversarial Losses under a Discriminative Adversarial Network Setting__<br>
+Hao-Wen Dong and Yi-Hsuan Yang<br>
+_arXiv preprint arXiv:1901.08753_, 2019.<br>
+[[website](https://salu133445.github.io/dan/)]
+[[paper](https://salu133445.github.io/dan/pdf/dan-arxiv-paper.pdf)]
+[[arxiv](https://arxiv.org/abs/1901.08753)]
+[[code](https://github.com/salu133445/dan)]
