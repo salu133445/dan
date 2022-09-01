@@ -1,0 +1,8 @@
+name: dan
+channels:
+  - conda-forge
+dependencies:
+  - python=3.6
+  - tensorflow-gpu=1.12
+  - sharedarray
+  - pyyaml
